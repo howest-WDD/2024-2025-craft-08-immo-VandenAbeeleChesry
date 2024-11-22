@@ -91,22 +91,32 @@
 					<div
 						class="col-12 col-sm-6 col-lg-4 ">
 						<!-- todo: link de card met de detail page  -->
-						<a href="#" class="c-immo-card">
+						<a href="{{ house.url }}" class="c-immo-card">
 							<div class="c-immo-card__imgcontainer">
 								<img
 								src={{house.cover.one().url()}} alt="" class="c-immo-card__img">
-								<!-- todo: Zorg dat de kleur veranderd dmv c-immo-card__tag--rent toe te passen wanneer iets for rent staat  -->
-								<div class="c-immo-card__tag c-immo-card__tag--sale">
-									<p>For
-										{{house.state}}</p>
-								</div>
 
+								<!-- todo: Zorg dat de kleur veranderd dmv c-immo-card__tag--rent toe te passen wanneer iets for rent staat  -->
+
+								<!-- Let op hier de sluiting van de div !-->
+								<div class="c-immo-card__tag 
+									{% switch house.state %}
+										{% case 'sale' %}
+											c-immo-card__tag--sale
+										{% case 'rent' %}
+											c-immo-card__tag--rent
+										{% default %}
+											c-immo-card__tag--default
+									{% endswitch %}">
+									<p>For {{ house.state }}</p>
+								</div>
 							</div>
+
 							<div class="c-immo-card__infocontainer">
 								<div class="c-immo-card__heading">
 									<h3 class="c-immo-card__title">{{house.title}}</h3>
 									<!-- todo: roep hier het amount op -->
-									<p class="c-immo-card__price">€000,000</p>
+									<p class="c-immo-card__price">{{ house.price|money }}</p>
 								</div>
 								<div class="c-immo-card__location">
 									<img src="{{url('img/icons/location.svg')}}" alt="">
@@ -117,24 +127,27 @@
 								</div>
 
 								<!-- todo: loop hier over de waarder van de details van het pand -->
-								<div class="c-immo-card__details">
-									<div class="c-immo-card__icons">
-										<img src="{{url('img/icons/bed.svg')}}" alt="">
-										<p>
-											0 beds
-										</p>
+								<!-- Roep de table op en loop zd !-->
+								{% for d in house.details %}
+									<div class="c-immo-card__details">
+										<div class="c-immo-card__icons">
+											<img src="{{url('img/icons/bed.svg')}}" alt="">
+											<p>
+												{{ d.bedrooms}} bedrooms
+											</p>
+										</div>
+										<div class="c-immo-card__icons">
+											<img src="{{url('img/icons/bath.svg')}}" alt="">
+											<p>{{ d.bathrooms }} bathrooms
+											</p>
+										</div>
+										<div class="c-immo-card__icons">
+											<img src="{{url('img/icons/sqf.svg')}}" alt="">
+											<p>{{ d.size }} m²
+											</p>
+										</div>
 									</div>
-									<div class="c-immo-card__icons">
-										<img src="{{url('img/icons/bath.svg')}}" alt="">
-										<p>0 baths
-										</p>
-									</div>
-									<div class="c-immo-card__icons">
-										<img src="{{url('img/icons/sqf.svg')}}" alt="">
-										<p>0 m²
-										</p>
-									</div>
-								</div>
+								{% endfor %}
 
 							</div>
 						</a>
