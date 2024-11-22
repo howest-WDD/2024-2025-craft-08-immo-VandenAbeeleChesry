@@ -35,45 +35,19 @@
 
 				<!-- todo: plak hier de categories vanuit templates/categories/index.twig -->
 				<div class="row g-3 justify-content-center c-section__content">
-					<a href="#" class="c-categories__card col-12 col-sm-3 col-lg-2">
-						<div class="c-categories__info">
-							<h3 class="c-categories__title">Town House</h3>
-							<p class="">2 properties</p>
-						</div>
-						<div class="c-categories__imgcontainer">
-							<img src="img/town-houses.jpeg" alt="" class="c-categories__img">
-						</div>
-					</a>
-
-					<a href="#" class="col-12 col-sm-3 col-lg-2 c-categories__card">
-						<div class="c-categories__info">
-							<h3 class="c-categories__title">Villa</h3>
-							<p class="">10 properties</p>
-						</div>
-						<div class="c-categories__imgcontainer">
-							<img src="img/modern-villa.jpeg" alt="" class="c-categories__img">
-						</div>
-					</a>
-
-					<a href="#" class="col-12 col-sm-3 col-lg-2 c-categories__card">
-						<div class="c-categories__info">
-							<h3 class="c-categories__title">Apartment</h3>
-							<p class="">3 properties</p>
-						</div>
-						<div class="c-categories__imgcontainer">
-							<img src="img/apartment.jpeg" alt="" class="c-categories__img">
-						</div>
-					</a>
-
-					<a href="#" class="col-12 col-sm-3 col-lg-2 c-categories__card">
-						<div class="c-categories__info">
-							<h3 class="c-categories__title">Office</h3>
-							<p class="">3 properties</p>
-						</div>
-						<div class="c-categories__imgcontainer">
-							<img src="img/office.jpeg" alt="" class="c-categories__img">
-						</div>
-					</a>
+					{% set structureCategorie = craft.entries.section('categories').level(1).one() %}
+					{% set arrStructure = structureCategorie.children %}
+					{% for s in arrStructure %}
+						<a href="{{ s.url }}" class="c-categories__card col-12 col-sm-3 col-lg-2">
+							<div class="c-categories__info">
+								<h3 class="c-categories__title">{{ s.title }}</h3>
+								<p class="">2 properties</p>
+							</div>
+							<div class="c-categories__imgcontainer">
+								<img src="{{ s.cover.one().url }}" alt="" class="c-categories__img">
+							</div>
+						</a>
+					{% endfor %}
 				</div>
 			</div>
 
@@ -98,7 +72,7 @@
 
 								<!-- todo: Zorg dat de kleur veranderd dmv c-immo-card__tag--rent toe te passen wanneer iets for rent staat  -->
 
-								<!-- Let op hier de sluiting van de div !-->
+								<!-- Let op hier binnen de class de switch/case  !-->
 								<div class="c-immo-card__tag 
 									{% switch house.state %}
 										{% case 'sale' %}

@@ -109,6 +109,7 @@
             <div class="col-12 col-sm-4 col-md-4 u-background-grey p-4 c-detail__list">
                 <h2 class="text-start">Details</h2>
                  <!-- todo: Loop over de waardes van de strengths van het pand bij .c-detail__list.-->
+                 <!-- Let op hier hebben we een matrix !-->
                 {% for s in entry.strengths %}
                 <ul>
                     <li class="c-detail__list-item">{{ s.listItem }}</li>
