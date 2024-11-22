@@ -119,10 +119,10 @@ fieldLayouts:
             dateAdded: '2024-11-18T17:47:45+00:00'
             elementCondition: null
             fieldUid: a3917b41-5b9e-455d-82b1-9867d010e228 # Body Text
-            handle: null
+            handle: description
             includeInCards: false
             instructions: null
-            label: null
+            label: Description
             providesThumbs: false
             required: false
             tip: null
